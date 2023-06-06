@@ -1,0 +1,28 @@
+label: "DVXplorer-DXA00253"
+id: 0
+cameras:
+- camera:
+    label: dvs
+    id: 1
+    line-delay-nanoseconds: 0
+    image_height: 480
+    image_width: 640
+    type: pinhole
+    intrinsics:
+      cols: 1
+      rows: 4
+      data: [617.8429701678226, 617.4556341820094, 285.5006013608948, 247.04244251907338]
+    distortion:
+      type: radial-tangential
+      parameters:
+        cols: 1
+        rows: 4
+        data: [-0.385891, 0.185123, -0.000122, 0.000492]
+  T_B_C:
+    cols: 4
+    rows: 4
+    data: [1.0, 0.0, 0.0, 0.0,
+         0.0, 1.0, 0.0, 0.0,
+         0.0, 0.0, 1.0, 0.0,
+         0.0, 0.0, 0.0, 1.0]
+

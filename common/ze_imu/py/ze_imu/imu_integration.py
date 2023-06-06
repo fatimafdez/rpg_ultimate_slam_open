@@ -154,7 +154,7 @@ def translation_estimation_errors(t_W_Bgt, t_W_Bes):
 def experiment1():
     
     t_max = 0.25
-    dt = 1.0/800.0
+    dt = 1.0/800.0 # PROPIO - cambio - original 1/800
     n = int(t_max / dt)
     
     # -----------------------------------------------------------------------------

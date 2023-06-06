@@ -1,5 +1,5 @@
 <launch>
-  <arg name="bag_filename"   default="data/boxes_6dof.bag" />
+  <arg name="bag_filename"   default="" />
 
   <node name="ze_vio_ceres" pkg="ze_vio_ceres" type="ze_vio_ceres_node"
     output="screen" required="true"

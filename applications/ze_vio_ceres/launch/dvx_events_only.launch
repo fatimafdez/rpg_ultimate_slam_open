@@ -12,7 +12,7 @@
     --vio_rescale_intrinsics_for_distortion=true
 
     --timeshift_cam_imu=0.0024 # IMU delay coming from low-pass filter
-    --calib_filename=$(find ze_vio_ceres)/../../calibration/dvx_cam_calib.yaml
+    --calib_filename=$(find ze_vio_ceres)/../../calibration/DVXplorer.yaml
 
     --flagfile=$(find ze_vio_ceres)/cfg/vio_base.conf
     --flagfile=$(find ze_vio_ceres)/cfg/vio_dvx.conf

@@ -1,5 +1,5 @@
 rostopic: /dvs/imu
-update_rate: 200.0 #Hz
+update_rate: 800.0 #Hz
 
 accelerometer_noise_density: 1.49e-3 #continous
 accelerometer_random_walk: 8.69e-5 

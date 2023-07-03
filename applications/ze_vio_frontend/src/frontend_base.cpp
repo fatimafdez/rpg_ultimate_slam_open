@@ -1132,17 +1132,17 @@ VioMotionType FrontendBase::classifyMotion(
   const uint32_t num_inliers = disparities_sq.size();
 
   // Check if we have enough features:
-  if (num_inliers < 10u) // PROPIO: Dato inicial 20u
+  if (num_inliers < 20u) // PROPIO: Dato inicial 20u
   {
-    LOG(WARNING) << "Motion Type: INVALID (tracking " << num_inliers
-                 << " features, < 10)"; // PROPIO: Dato inicial 20
+    LOG_EVERY_N(WARNING, 10) << "Motion Type: INVALID  (tracking " << num_inliers
+                 << " features, < 20)"; // PROPIO: Dato inicial 20
     return VioMotionType::Invalid;
   }
 
   // Check that we have X% inliers:
   const real_t inlier_ratio =
       static_cast<real_t>(num_inliers) / (num_inliers + num_outliers);
-  if (inlier_ratio < 0.1) // PROPIO: inliner original <0.6
+  if (inlier_ratio < 0.6) // PROPIO: inliner original <0.6
   {
     LOG(WARNING) << "Motion Type: INVALID (inlier ratio = "
                  << inlier_ratio * 100.0 << "%)";

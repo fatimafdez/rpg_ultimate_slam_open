@@ -397,7 +397,7 @@ int ImuError::propagation(const ImuStamps& imu_stamps,
         || std::abs(omega_S_1[2]) > imu_params.g_max)
     {
       sigma_g_c *= 100;
-      LOG(WARNING) << "gyr saturation";
+      LOG_EVERY_N(WARNING, 20) << "gyr saturation";
     }
 
     if (std::abs(acc_S_0[0]) > imu_params.a_max

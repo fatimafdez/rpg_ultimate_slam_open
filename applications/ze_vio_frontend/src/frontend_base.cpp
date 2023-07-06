@@ -1144,7 +1144,7 @@ VioMotionType FrontendBase::classifyMotion(
       static_cast<real_t>(num_inliers) / (num_inliers + num_outliers);
   if (inlier_ratio < 0.6) // PROPIO: inliner original <0.6
   {
-    LOG(WARNING) << "Motion Type: INVALID (inlier ratio = "
+    LOG_EVERY_N(WARNING, 20) << "Motion Type: INVALID (inlier ratio = "
                  << inlier_ratio * 100.0 << "%)";
     return VioMotionType::Invalid;
   }

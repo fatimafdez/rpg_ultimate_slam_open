@@ -1,30 +1,27 @@
 <launch>
-    <arg name="data_dir" default="$(find ze_vio_ceres)../../data" />
     <arg name="bag_filename"        default="" />
     <!--arg name="rate_bag"            default="0.5" /-->
-    <!--arg name="motion_correction"   default="1" /-->
     <arg name="camera_name"         default="DVXplorer" />
 
     <node name="ze_vio_ceres" pkg="ze_vio_ceres" type="ze_vio_ceres_node"
         output="screen" required="true"
         args="
             --data_source=1  # rosbag
+            --vio_use_events=1
+            --vio_use_events_and_images=0
+            --vio_rescale_intrinsics_for_distortion=True
+
             --bag_filename=$(find ze_vio_ceres)../../data/$(arg bag_filename)
             
+            --calib_filename=$(find ze_vio_ceres)/../../calibration/DVXplorer.yaml
+            --timeshift_cam_imu=0 # 0.00266944159539
+
             --flagfile=$(find ze_vio_ceres)/cfg/vio_base.conf
             --flagfile=$(find ze_vio_ceres)/cfg/dvx_imu_parameters.conf
             --flagfile=$(find ze_vio_ceres)/cfg/dvx_parameters.conf
           
-            --calib_filename=$(find ze_vio_ceres)/../../calibration/DVXplorer.yaml
-            --timeshift_cam_imu=0.00266944159539
-
-            --vio_do_motion_correction=True
-
-            --vio_use_events=1
-            --vio_use_events_and_images=0
-            #--vio_use_integration_time=false
-            #--vio_rescale_intrinsics_for_distortion=True
-        
+            --vio_do_motion_correction=1
+            
         ">
     </node>
 

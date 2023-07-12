@@ -13,29 +13,17 @@
     --vio_use_events_and_images=0
     --vio_rescale_intrinsics_for_distortion=true
 
-    --timeshift_cam_imu=$(arg timeshift_cam_imu)
     --calib_filename=$(find ze_vio_ceres)/../../calibration/DVXplorer.yaml
+    --timeshift_cam_imu=$(arg timeshift_cam_imu)    
 
     --flagfile=$(find ze_vio_ceres)/cfg/vio_base.conf
-    --flagfile=$(find ze_vio_ceres)/cfg/vio_dvx.conf
+    --flagfile=$(find ze_vio_ceres)/cfg/dvx_imu_parameters.conf
+    --flagfile=$(find ze_vio_ceres)/cfg/dvx_parameters.conf
 
-    --data_interval_between_event_packets=33  # events-only pipeline: interval between successive event frames.
-    --data_use_time_interval=true  # events-only pipeline: if true, data_interval_between_event_packets is interpreted as milliseconds, otherwise as number of events
-
-    --data_size_augmented_event_packet=40000  # max number of events per event frame (should be >= vio_frame_size)
-    --vio_frame_size=$(arg frame_size)  # each event frame will be drawn with that number of events
     --vio_do_motion_correction=$(arg motion_correction)
-    --noise_event_rate=20000
-    --vio_frame_norm_factor=2.0 # 4.0
 
-    --vio_trace_pose=1
-    --log_dir=/tmp
-    --vmodule=feature_tracker=0
-    --colorlogtostderr=1
-    --logtostderr=1
-    --alsologtostderr=1
-    --vio_viz_feature_tracks=True
-    --vio_viz_feature_tracks_length=0
+    --vio_frame_size=$(arg frame_size)  # each event frame will be drawn with that number of events
+
     ">
   </node>
 

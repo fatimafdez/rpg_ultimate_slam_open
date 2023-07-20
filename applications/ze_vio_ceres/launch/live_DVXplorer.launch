@@ -1,8 +1,6 @@
 <launch>
   <arg name="camera_name" />
   <arg name="timeshift_cam_imu"   default="0" />
-  <arg name="motion_correction"   default="1" />
-  <arg name="frame_size"   default="15000" />
 
   <node name="ze_vio_ceres" pkg="ze_vio_ceres" type="ze_vio_ceres_node"
     output="screen" required="true"
@@ -20,12 +18,16 @@
     --flagfile=$(find ze_vio_ceres)/cfg/dvx_imu_parameters.conf
     --flagfile=$(find ze_vio_ceres)/cfg/dvx_parameters.conf
 
-    --vio_do_motion_correction=$(arg motion_correction)
+    --vio_do_motion_correction=1
+    
+    "
+  />
 
-    --vio_frame_size=$(arg frame_size)  # each event frame will be drawn with that number of events
-
-    ">
-  </node>
+  <node name="tf_static_vicon_origin_to_odom_origin_node" 
+    pkg="ze_vio_ceres"
+    type="tf_static_vicon_origin_to_odom_origin.py"
+    output="screen" args=""
+  />  
 
   <node name="visualisation" pkg="rviz" type="rviz" output="screen" args="-d $(find ze_visualization)/rviz/ze.rviz" />
 

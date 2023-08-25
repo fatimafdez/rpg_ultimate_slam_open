@@ -17,7 +17,7 @@ SOURCE_ROUTE1="$HOME/Projects/uslam_ws/devel/setup.zsh"
 
 # Parameters values for iteration
 grid_sizes=(32 64 128)
-detector_names=(FAST ORB BRISK)
+detector_names=(FAST FAST FAST)
 border_margins=(5 10 20)
 thresholds=(50 50 50)
 max_features=(100 100 100)
@@ -30,13 +30,16 @@ max_features=(100 100 100)
 source $SOURCE_ROUTE1
 
 # Loop for each parameter
-for ((i=1; i<${#grid_sizes[@]}; i++)); do
+for ((i=1; i<=(${#grid_sizes[@]}); i++)); do
     grid_size=${grid_sizes[i]}
     detector_name=${detector_names[i]}
     border_margin=${border_margins[i]}
     threshold=${thresholds[i]}
     max_feature=${max_features[i]}
-
+    printf "hola1\n"
+    printf ${#grid_sizes[@]}
+    printf "hola2\n"
+    printf $i
     # Parameters changes in configuration
     sed -i "s/--imp_detector_grid_size=.*/--imp_detector_grid_size=$grid_size/g" $CONF_PATH
     sed -i "s/--imp_detector_name=.*/--imp_detector_name=$detector_name/g" $CONF_PATH
@@ -44,14 +47,11 @@ for ((i=1; i<${#grid_sizes[@]}; i++)); do
     sed -i "s/--imp_detector_threshold=.*/--imp_detector_threshold=$threshold/g" $CONF_PATH
     sed -i "s/--imp_detector_max_features_per_frame=.*/--imp_detector_max_features_per_frame=$max_feature/g" $CONF_PATH
 
-    print hola1
     cd $SH_PATH && ./tmux_parameters_automatization.sh &
-    print hola2
 
     sleep 1
 
-    # Wait for the bag in tmux to finish playing by reading the output of rosbag
-    
+    # Wait for the bag in tmux to finish playing
     while true; do 
     if pgrep -x "rosbag" > /dev/null; then
         printf "rosbag is running\n"
@@ -59,21 +59,12 @@ for ((i=1; i<${#grid_sizes[@]}; i++)); do
         printf "rosbag is not running\n"
         break
     fi
-    sleep 1
+    sleep 2
     done 
-    # while [ "$(tmux capture-pane -p -t 2 | grep 'termine')" == -z ]; do
-    #     sleep 1
-    #     printf "Waiting for bag to finish playing...\n"
-    # done
-
-    print hola3
+    
     tmux kill-session -t parameters_uslam
 
-    printf "Bag finished playing\n"
-    # Send a shutdown signal to the ze_vio_ceres launch
-    #rostopic pub /ze_vio_ceres/exit std_msgs/Empty -1
-
-    # Once the bag is finished, kill the SLAM launch
+    printf "Iteration complete\n"
 
     sleep 1
 
@@ -108,6 +99,11 @@ done
     
 # done
 
+
+# while [ "$(tmux capture-pane -p -t 2 | grep 'termine')" == -z ]; do
+    #     sleep 1
+    #     printf "Waiting for bag to finish playing...\n"
+    # done
 
 ########################################################################
 

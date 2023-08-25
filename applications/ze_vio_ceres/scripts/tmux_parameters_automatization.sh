@@ -78,7 +78,7 @@ if [ "$SESSIONEXISTS" = "" ]; then
 
     tmux send-keys -t $SESSION:0.0 "cd $WS_PATH && source $SOURCE_ROUTE1 && roslaunch ze_vio_ceres live_DVXplorer.launch --wait" C-m
 
-    tmux send-keys -t $SESSION:0.2 "cd $BAGS_PATH && rosbag play -d 2 $BAG_NAME use_sim_time:=true --clock --wait && print termine" C-m
+    tmux send-keys -t $SESSION:0.2 "cd $BAGS_PATH && rosbag play -d 2 $BAG_NAME use_sim_time:=true --clock -s 24 --wait && print termine" C-m
 
     # tmux send-keys -t $SESSION:0.2 "source $SOURCE_ROUTE4" C-m
     # docker container exec -it dvx_uslam zsh

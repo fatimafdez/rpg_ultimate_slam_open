@@ -1,4 +1,16 @@
 #!/usr/bin/env zsh
+
+# Create ~/.tmux.conf if it does not exist
+# --------------------------------------------------------------
+if [ ! -f ~/.tmux.conf ]; then
+    touch ~/.tmux.conf
+    echo "set -g default-terminal 'screen-256color'" >~/.tmux.conf
+    echo "set -g status-bg green" >>~/.tmux.conf
+    echo "set -g status-right \"%H:%M\"" >>~/.tmux.conf
+    echo "set -g history-limit 1000000" >>~/.tmux.conf
+    echo "set -g mouse on" >>~/.tmux.conf
+fi
+
 # Function to split tmux terminal into 4, 6, 8, 16, 32, .. panes
 # --------------------------------------------------------------
 tsplit() {

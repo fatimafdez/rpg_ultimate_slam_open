@@ -16,7 +16,7 @@
 
     --flagfile=$(find ze_vio_ceres)/cfg/vio_base.conf
     --flagfile=$(find ze_vio_ceres)/cfg/dvx_imu_parameters.conf
-    --flagfile=$(find ze_vio_ceres)/cfg/dvx_parameters.conf
+    --flagfile=$(find ze_vio_ceres)/cfg/dvx_parameters_study.conf
 
     --vio_do_motion_correction=1
     

@@ -3,6 +3,18 @@
 #include <geometry_msgs/PoseStamped.h>
 #include <stdio.h>
 #include <fstream>
+#include <cstdlib>  // Header for getenv
+
+// Default parameters
+// Default txt file names
+std::string filename_odometry = "uslam_odometry_1.txt";
+std::string filename_vicon = "uslam_vicon_1.txt";
+
+// Default vicon topic name
+std::string viconTopicName = "/vicon_client/dvxplorer/pose";
+
+// Save directory
+std::string save_Directory= std::string(getenv("HOME")) + "/Projects/uslam_ws/src/rpg_ultimate_slam_open/data/txt_data/";
 
 // Global variable to store the file stream
 std::ofstream odometryFile;
@@ -35,19 +47,31 @@ int main(int argc, char** argv) {
     ros::NodeHandle nh_odometry;
     ros::NodeHandle nh_vicon;
 
+    // Check if arguments were provided for file names and vicon topic
+    if (argc >= 4) {
+        filename_odometry = argv[1];
+        filename_vicon = argv[2];
+        viconTopicName = argv[3];
+    } else {
+        ROS_WARN("Using default values for parameters. Correct usage: rosrun ze_vio_ceres tmux_txt_writing_automatization.sh <odometry_file> <vicon_file> <vicon_topic>");
+        return 1;
+    }
+
     // Name of the odometry topic to subscribe to
     std::string odometry_topic = "/ze_vio/odometry";
-    std::string vicon_topic = "/vicon_client/dvxplorer02/pose";
+    std::string viconTopicParam;
+    ros::param::get("/vicon_topic", viconTopicParam);
+    std::string vicon_topic = viconTopicParam.empty() ? viconTopicName : viconTopicParam;
+
+    ros::param::param<std::string>("/save_directory", save_Directory);
+
+    filename_odometry = save_Directory + filename_odometry;
+    filename_vicon = save_Directory + filename_vicon;
 
     // Create a ROS subscriber that listens to the odometry topic and calls the callback function
     ros::Subscriber sub_odometry = nh_odometry.subscribe(odometry_topic, 1, odometryCallback);
-    // queue size = 1, i.e. only the latest message is stored in the queue
     ros::Subscriber sub_vicon = nh_vicon.subscribe(vicon_topic, 1, viconCallback);
-
-    // Name of the output file
-    std::string filename="uslam_trajectory.txt";
-    std::string filename_odometry="uslam_odometry.txt";
-    std::string filename_vicon="uslam_vicon.txt";
+    // queue size = 1, i.e. only the latest message is stored in the queue
 
     // Open file to write odometry data
     odometryFile.open(filename_odometry.c_str());
@@ -69,7 +93,6 @@ int main(int argc, char** argv) {
 
     // Start spinning and processing callbacks
     spinner.spin(); 
-
 
     // Close the file
     odometryFile.close();

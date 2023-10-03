@@ -55,14 +55,30 @@ SESSION="parameters_uslam"
 SESSIONEXISTS=$(tmux list-sessions | grep $SESSION)
 LOCAL_IP='127.0.0.1'
 
+########################################################################
+# PARAMETERS TO BE SET
+########################################################################
 
 # PATHS
 WS_PATH="$HOME/Projects/uslam_ws"
-SH_PATH="$HOME/Projects/uslam_ws/src/rpg_ultimate_slam_open/applications/ze_vio_ceres/scripts"
 BAGS_PATH="$HOME/Projects/uslam_ws/src/rpg_ultimate_slam_open/data"
 
 # FILE NAMES
-BAG_NAME="uslam_01_x.bag"
+# BAG_NAME=2023-07-04-12-51.bag
+# BAG_NAME=2023-07-04-12-53.bag
+# BAG_NAME=events_F550_03-16-11.bag
+# BAG_NAME=uslam_01_x.bag
+# BAG_NAME=uslam_01_y.bag
+# BAG_NAME=uslam_01_z.bag
+# BAG_NAME=uslam_vicon_00.bag
+# BAG_NAME=uslam_vicon_01.bag
+# BAG_NAME=uslam_vicon_0.bag
+# BAG_NAME="uslam_vicon_1.bag"
+# BAG_NAME=uslam_vicon_2.bag
+# BAG_NAME=uslam_vicon_3.bag
+# BAG_NAME=uslam_vicon_4.bag
+ BAG_NAME="uslam_vicon_11.bag"
+# BAG_NAME=uslam_vicon_12.bag
 
 # Source of ROS workspace
 SOURCE_ROUTE1="$HOME/Projects/uslam_ws/devel/setup.zsh"
@@ -88,15 +104,11 @@ if [ "$SESSIONEXISTS" = "" ]; then
 
     tmux send-keys -t $SESSION:0.1 "roscore" C-m
 
-    tmux send-keys -t $SESSION:0.0 "cd $WS_PATH && source $SOURCE_ROUTE1 && roslaunch ze_vio_ceres live_DVXplorer.launch --wait" C-m
+    tmux send-keys -t $SESSION:0.0 "cd $WS_PATH && source $SOURCE_ROUTE1 && roslaunch ze_vio_ceres live_DVXplorer_study.launch --wait" C-m
 
     tmux send-keys -t $SESSION:0.2 "cd $BAGS_PATH && rosbag play -d 2 $BAG_NAME use_sim_time:=true --clock -s 24 --wait && print termine" C-m
 
-    # tmux send-keys -t $SESSION:0.2 "source $SOURCE_ROUTE4" C-m
-    # docker container exec -it dvx_uslam zsh
 fi
 # Attach Session, on the Main window
 tmux attach-session -t $SESSION
 exit 0
-
-# docker container exec -it uslam_base_container zsh

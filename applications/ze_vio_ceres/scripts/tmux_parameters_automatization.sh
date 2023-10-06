@@ -62,6 +62,7 @@ LOCAL_IP='127.0.0.1'
 # PATHS
 WS_PATH="$HOME/Projects/uslam_ws"
 BAGS_PATH="$HOME/Projects/uslam_ws/src/rpg_ultimate_slam_open/data"
+BAGS_PATH="$HOME/Utils/ir_test_bags/f550_events_vuelos"
 
 # FILE NAMES
 # BAG_NAME=2023-07-04-12-51.bag
@@ -73,12 +74,29 @@ BAGS_PATH="$HOME/Projects/uslam_ws/src/rpg_ultimate_slam_open/data"
 # BAG_NAME=uslam_vicon_00.bag
 # BAG_NAME=uslam_vicon_01.bag
 # BAG_NAME=uslam_vicon_0.bag
-# BAG_NAME="uslam_vicon_1.bag"
+# BAG_NAME=uslam_vicon_1.bag
 # BAG_NAME=uslam_vicon_2.bag
 # BAG_NAME=uslam_vicon_3.bag
 # BAG_NAME=uslam_vicon_4.bag
- BAG_NAME="uslam_vicon_11.bag"
+# BAG_NAME=uslam_vicon_11.bag
 # BAG_NAME=uslam_vicon_12.bag
+# BAG_NAME=f550_events_2023-10-04-13-11-38.bag
+# BAG_NAME=f550_events_2023-10-04-13-17-32.bag
+# BAG_NAME=f550_events_2023-10-04-13-21-55.bag
+# BAG_NAME=f550_events_2023-10-04-13-25-00.bag
+# BAG_NAME=f550_events_2023-10-04-13-27-18.bag
+# BAG_NAME=f550_events_2023-10-04-16-25-55.bag
+# BAG_NAME=f550_events_2023-10-04-16-31-40.bag
+
+# VUELOS
+ BAG_NAME=f550_events_2023-10-05-12-22-06.bag
+# BAG_NAME=f550_events_2023-10-05-12-24-20.bag
+# BAG_NAME=f550_events_2023-10-05-12-40-41.bag
+# BAG_NAME=f550_events_2023-10-05-12-46-29.bag
+# BAG_NAME=f550_events_2023-10-05-12-55-57.bag
+# BAG_NAME=f550_events_2023-10-05-12-59-27.bag
+# BAG_NAME=f550_events_2023-10-05-13-12-02.bag
+
 
 # Source of ROS workspace
 SOURCE_ROUTE1="$HOME/Projects/uslam_ws/devel/setup.zsh"
@@ -102,11 +120,11 @@ if [ "$SESSIONEXISTS" = "" ]; then
     tmux setw synchronize-panes off
 
 
-    tmux send-keys -t $SESSION:0.1 "roscore" C-m
+    tmux send-keys -t $SESSION:0.0 "roscore" C-m
 
-    tmux send-keys -t $SESSION:0.0 "cd $WS_PATH && source $SOURCE_ROUTE1 && roslaunch ze_vio_ceres live_DVXplorer_study.launch --wait" C-m
+    tmux send-keys -t $SESSION:0.1 "cd $WS_PATH && source $SOURCE_ROUTE1 && roslaunch ze_vio_ceres live_DVXplorer.launch --wait" C-m
 
-    tmux send-keys -t $SESSION:0.2 "cd $BAGS_PATH && rosbag play -d 2 $BAG_NAME use_sim_time:=true --clock -s 24 --wait && print termine" C-m
+    tmux send-keys -t $SESSION:0.2 "cd $BAGS_PATH && rosbag play $BAG_NAME use_sim_time:=true --clock -s 70 -u 10 && print termine" C-m
 
 fi
 # Attach Session, on the Main window

@@ -11,13 +11,26 @@
     --vio_use_events_and_images=0
     --vio_rescale_intrinsics_for_distortion=true
 
-    --calib_filename=$(find ze_vio_ceres)/../../calibration/DVXplorer.yaml
-    --timeshift_cam_imu=$(arg timeshift_cam_imu)    
-
-    --flagfile=$(find ze_vio_ceres)/cfg/vio_base.conf
+    ################ SET PARAMETERS ###########################
+    # Calibration file
+    # when using camera imu and no ir filter 'DVXplorer.yaml'
+    # when using camera imu and ir filter 'DVXplorer-ir.yaml'
+    # when using autopilot imu and ir filter 'DVXplorer-ir-autopiloto'
+    --calib_filename=$(find ze_vio_ceres)/../../calibration/DVXplorer-ir.yaml
+    
+    # IMU calibration file
+    # when using camera imu 'dvx_imu_parameters'
+    # when using autopilot imu 'autopiloto_imu_parameters'
     --flagfile=$(find ze_vio_ceres)/cfg/dvx_imu_parameters.conf
-    --flagfile=$(find ze_vio_ceres)/cfg/dvx_parameters.conf
 
+    # USLAM parameters
+    # f we want to use only one parameter 'dvx_parameters.yaml'
+    # f we want to do a parameters study 'dvx_parameters_study.yaml'
+    --flagfile=$(find ze_vio_ceres)/cfg/dvx_parameters_study.conf
+    ############################################################
+
+    --timeshift_cam_imu=$(arg timeshift_cam_imu) 
+    --flagfile=$(find ze_vio_ceres)/cfg/vio_base.conf
     --vio_do_motion_correction=1
     
     "

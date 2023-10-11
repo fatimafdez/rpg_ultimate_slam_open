@@ -41,6 +41,9 @@ add_executable(odometry_subscriber_c src/odometry_subscriber_c.cpp)
 target_link_libraries(odometry_subscriber_c ${catkin_LIBRARIES})
 # add_dependencies(odometry_subscriber_c )
 
+add_executable(event_msg_length src/event_msg_length.cpp)
+target_link_libraries(event_msg_length ${catkin_LIBRARIES})
+
 ##########
 # GTESTS #
 ##########

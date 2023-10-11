@@ -1,0 +1,43 @@
+<launch>
+   <arg name="PI" value="3.141592654"/>
+   <arg name="PI_2" value="1.570796327"/>
+   <arg name="CAM_PITCH" value="0.0872665"/>
+
+   <!--
+						base_link
+							|
+				____________|____________
+				|						|
+			dvs_sensor				fcu (Pixhawk)
+				|							
+		dvs_sensor_optical
+
+
+   -->
+
+	<!-- base_link -> dvs_sensor (DVXPLORER) -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="baselink_2_dvs_sensor"  output="screen" respawn="true" 
+    args="0.085 0.0 -0.135 0.0 $(arg CAM_PITCH) 0.0 base_link dvs_sensor"/>
+    <!--
+        Note:
+        dvs_sensor frame is the center of the DVXPLORER in a FLU coordinate system (Forward, Left, Up)
+    -->
+
+	<!-- dvs_sensor -> dvs_sensor_optical_frame (Optical Axis) -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="dvs_sensor_2_dvs_sensor_optical"  output="screen" respawn="true" 
+    args="0.0 0.0 0.0 -$(arg PI_2) 0.0 -$(arg PI_2) dvs_sensor dvs_sensor_optical_frame"/>
+	<!--
+		Note:
+		dvs_sensor_optical frame are the optical axis of the DVXPLORER with the z axis pointing forward, 
+		the x axis pointing right and the y axis pointing down.
+	-->
+
+	<!-- base_link -> fcu (Pixhawk) -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="baselink_2_fcu"  output="screen" respawn="true" 
+    args="0.0 0.0 0.0 0.0 0.0 0.0 base_link fcu"/>
+    <!--
+        Note:
+        fcu frame is the flight controller unit (Pixhawk) which coincides with the base_link frame.
+    -->
+
+</launch>

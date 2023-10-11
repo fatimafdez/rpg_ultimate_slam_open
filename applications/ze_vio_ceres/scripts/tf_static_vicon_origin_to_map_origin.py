@@ -11,7 +11,7 @@ class ViconTFPublisher():
    def __init__(self, node_name):
       rospy.init_node(node_name, anonymous=False)
 
-      vicon_topic = rospy.get_param('~vicon_pose_topic', default="/vicon_client/dvxplorer02/pose")
+      vicon_topic = rospy.get_param('~vicon_pose_topic', default="/vicon_client/f550_events/pose")
       self.odom_frame = rospy.get_param('~odom_frame',   default="map") # odom o map
       self.__vicon_sub = rospy.Subscriber(vicon_topic, PoseStamped, self.__vicon_cb)
       self.__tf_pub = StaticTransformBroadcaster()

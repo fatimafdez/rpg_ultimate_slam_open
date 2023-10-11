@@ -31,16 +31,19 @@
 
     --timeshift_cam_imu=$(arg timeshift_cam_imu) 
     --flagfile=$(find ze_vio_ceres)/cfg/vio_base.conf
-    --vio_do_motion_correction=1
-    
+
     "
   />
 
-  <node name="tf_static_vicon_origin_to_odom_origin_node" 
+  <node name="tf_static_vicon_origin_to_map_origin_node" 
     pkg="ze_vio_ceres"
-    type="tf_static_vicon_origin_to_odom_origin.py"
+    type="tf_static_vicon_origin_to_map_origin.py"
     output="screen" args=""
   />  
+
+  <include file="$(find ze_vio_ceres)/launch/f550_tfs.launch"/>
+
+  <include file="$(find ze_vio_ceres)/launch/tf_static_map_origin_to_odom.launch"/>
 
   <node name="visualisation" pkg="rviz" type="rviz" output="screen" args="-d $(find ze_visualization)/rviz/ze.rviz" />
 

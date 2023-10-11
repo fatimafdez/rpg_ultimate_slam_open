@@ -10,6 +10,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /TF1
         - /TF1/Frames1
         - /Marker1/Namespaces1
         - /Pose1
@@ -59,12 +60,18 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
-        body:
+        base_link:
           Value: true
-        dvxplorer02:
-          Value: true
-        map:
+        dvs_sensor:
           Value: false
+        dvs_sensor_optical_frame:
+          Value: false
+        fcu:
+          Value: false
+        map:
+          Value: true
+        odom:
+          Value: true
         vicon:
           Value: true
       Marker Alpha: 1
@@ -75,11 +82,14 @@ Visualization Manager:
       Show Names: false
       Tree:
         vicon:
-          dvxplorer02:
-            {}
           map:
-            body:
-              {}
+            odom:
+              base_link:
+                dvs_sensor:
+                  dvs_sensor_optical_frame:
+                    {}
+                fcu:
+                  {}
       Update Interval: 0
       Value: true
     - Class: rviz/Marker
@@ -87,10 +97,10 @@ Visualization Manager:
       Marker Topic: /ze_vio_ceres/markers
       Name: Marker
       Namespaces:
-        all_landmarks: false
-        frame: false
+        all_landmarks: true
+        frame: true
         landmarks: true
-        seeds: false
+        seeds: true
         traj: true
       Queue Size: 100
       Value: true
@@ -131,8 +141,8 @@ Visualization Manager:
       Unreliable: false
       Value: true
     - Alpha: 1
-      Axes Length: 0.10000000149011612
-      Axes Radius: 0.009999999776482582
+      Axes Length: 0.20000000298023224
+      Axes Radius: 0.03999999910593033
       Class: rviz/Pose
       Color: 255; 25; 0
       Enabled: true
@@ -143,14 +153,14 @@ Visualization Manager:
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Axes
-      Topic: /vicon_client/dvxplorer02/pose
+      Topic: /vicon_client/f550_events/pose
       Unreliable: false
       Value: true
   Enabled: true
   Global Options:
     Background Color: 220; 220; 220
     Default Light: true
-    Fixed Frame: map
+    Fixed Frame: vicon
     Frame Rate: 30
   Name: root
   Tools:
@@ -164,7 +174,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 15.925853729248047
+      Distance: 6.630172252655029
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -172,17 +182,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.9480068683624268
-        Y: 4.204061508178711
-        Z: 2.963184118270874
+        X: -0.5088366270065308
+        Y: 0.8626759648323059
+        Z: 0.5712398886680603
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.22479687631130219
+      Pitch: 1.1647969484329224
       Target Frame: <Fixed Frame>
-      Yaw: 4.678544521331787
+      Yaw: 3.7935428619384766
     Saved: ~
 Window Geometry:
   DAVIS frame:

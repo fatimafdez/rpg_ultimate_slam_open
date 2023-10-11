@@ -600,8 +600,8 @@ void VioVisualizer::publishOdometry(const Odometry &state)
   {
     nav_msgs::Odometry msg;
     msg.header.stamp = ros::Time().fromNSec(state.stamp);
-    msg.header.frame_id = "map";
-    msg.child_frame_id = "body";
+    msg.header.frame_id = "odom";
+    msg.child_frame_id = "base_link";
 
     const Position& p = state.T_W_B.getPosition();
     msg.pose.pose.position.x = p[0];
@@ -627,7 +627,7 @@ void VioVisualizer::publishOdometry(const Odometry &state)
     pub_odom_->publish(msg);
   }
 
-  viz_->drawRobot("body", state.T_W_B, ros::Time().fromNSec(state.stamp));
+  viz_->drawRobot("base_link", state.T_W_B, ros::Time().fromNSec(state.stamp));
 }
 
 // -----------------------------------------------------------------------------

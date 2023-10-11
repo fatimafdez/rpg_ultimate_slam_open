@@ -115,7 +115,7 @@ private:
   std::shared_ptr<ros::NodeHandle> nh_;
   std::shared_ptr<ros::Publisher> pub_marker_;
   std::shared_ptr<tf::TransformBroadcaster> tf_broadcaster_;
-  std::string world_frame = "map";    //!< World-frame
+  std::string world_frame = "odom";    //!< World-frame
   double viz_scale_ = 1.0;            //!< Scale marker size
 };
 

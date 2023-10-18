@@ -37,12 +37,21 @@ catkin_package(
 cs_add_executable(ze_vio_ceres_node src/vio_ceres_node.cpp)
 target_link_libraries(ze_vio_ceres_node ${PROJECT_NAME} ${OpenCV_LIBRARIES})
 
-add_executable(odometry_subscriber_c src/odometry_subscriber_c.cpp)
-target_link_libraries(odometry_subscriber_c ${catkin_LIBRARIES})
-# add_dependencies(odometry_subscriber_c )
+add_executable(txt_writing_parameters src/txt_writing_parameters.cpp)
+target_link_libraries(txt_writing_parameters ${catkin_LIBRARIES})
+# add_dependencies(txt_writing_parameters )
+
+add_executable(txt_writing_vicon src/txt_writing_vicon.cpp)
+target_link_libraries(txt_writing_vicon ${catkin_LIBRARIES})
+
+add_executable(txt_writing_odometry src/txt_writing_odometry.cpp)
+target_link_libraries(txt_writing_odometry ${catkin_LIBRARIES})
 
 add_executable(event_msg_length src/event_msg_length.cpp)
 target_link_libraries(event_msg_length ${catkin_LIBRARIES})
+
+add_executable(vicon_path src/vicon_path.cpp)
+target_link_libraries(vicon_path ${catkin_LIBRARIES})
 
 ##########
 # GTESTS #

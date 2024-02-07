@@ -25,7 +25,7 @@
 
 	<!-- dvs_sensor -> dvs_sensor_optical_frame (Optical Axis) -->
     <node pkg="tf2_ros" type="static_transform_publisher" name="dvs_sensor_2_dvs_sensor_optical"  output="screen" respawn="true" 
-    args="0.0 0.0 0.0 -$(arg PI_2) 0.0 -$(arg PI_2) dvs_sensor dvs_sensor_optical_frame"/>
+    args="0.0 0.0 0.0 0.0 -$(arg PI_2) $(arg PI_2) dvs_sensor dvs_sensor_optical_frame"/>
 	<!--
 		Note:
 		dvs_sensor_optical frame are the optical axis of the DVXPLORER with the z axis pointing forward, 

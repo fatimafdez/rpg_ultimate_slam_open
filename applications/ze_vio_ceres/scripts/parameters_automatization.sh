@@ -5,24 +5,23 @@
 # INITIALIZATION
 
 # PATHS
-SH_PATH="$HOME/Projects/uslam_ws/src/rpg_ultimate_slam_open/applications/ze_vio_ceres/scripts"
-CONF_PATH="$HOME/Projects/uslam_ws/src/rpg_ultimate_slam_open/applications/ze_vio_ceres/cfg/dvx_parameters_study.conf"
-
-# Source of ROS workspace
-SOURCE_ROUTE1="$HOME/Projects/uslam_ws/devel/setup.zsh"
+#SH_PATH="$HOME/Projects/uslam_ws/src/rpg_ultimate_slam_open/applications/ze_vio_ceres/scripts"
+SH_PATH=$(rospack find ze_vio_ceres)/scripts
+#CONF_PATH="$HOME/Projects/uslam_ws/src/rpg_ultimate_slam_open/applications/ze_vio_ceres/cfg/dvx_parameters_study.conf"
+CONF_PATH=$(rospack find ze_vio_ceres)/cfg/dvx_parameters_study.conf
 
 # Number of iterations
 iterations_number=6
 
 # Parameters to change
 declare -a param=(
-#imp_detector_grid_size 32 32 32 32
+imp_detector_grid_size 64 64 64 64 64 64
 #imp_detector_border_margin 5 5 5 5
-#imp_detector_threshold 50 50 50 50
-#imp_detector_max_features_per_frame 100 100 100 100
-data_interval_between_event_packets 30 30 30 30 30 30
-data_size_augmented_event_packet 10000 10000 55000 55000 100000 100000
-vio_frame_size                   10000 10000 55000 55000 100000 100000
+imp_detector_threshold 30 30 30 30 30 30
+imp_detector_max_features_per_frame 300 300 300 300 300 300
+#data_interval_between_event_packets 30 30 30 30 30 30
+data_size_augmented_event_packet 50000 50000 50000 50000 50000 50000
+vio_frame_size                   60000 60000 70000 80000 90000 90000
 #vio_frame_norm_factor 1.0 2.0 3.0 4.0 # el 4 mejor
 #vio_kfselect_numfts_lower_thresh 30 30 30 30
 #vio_add_every_nth_frame_to_backend 2 1 1 2 # el 1 mejor
@@ -30,7 +29,7 @@ vio_frame_size                   10000 10000 55000 55000 100000 100000
 #vio_do_motion_correction 0 1 0 1
 #vio_feature_tracker_patch_size_by8 3.2 3,2 5,5 10
 #vio_feature_tracker_termcrit_min_update_squared 0.1 0.2 0.5 1
-vio_viz_level 0 1 0 1 1 0
+#vio_viz_level 0 1 1 1 1 0
 )
 
 ########################################################################

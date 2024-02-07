@@ -1,4 +1,16 @@
 <launch>
+  <param name="use_vicon" value="$(env use_vicon)" />
+  <param name="vicon_topic_name" value="$(env vicon_topic_name)" />
+
+  <param name="write_txt_odometry" value="$(env write_txt_odometry)" />
+  <param name="write_txt_vicon" value="$(env write_txt_vicon)" />
+  <param name="filename_odometry" value="$(env filename_odometry)" />
+  <param name="filename_vicon" value="$(env filename_vicon)" />
+  <param name="save_Directory" value="$(env save_Directory)" />
+
+  <param name="WS_PATH" value="$(env WS_PATH)" />
+  <param name="BAGS_PATH" value="$(env BAGS_PATH)" />
+  
   <arg name="camera_name" />
   <arg name="timeshift_cam_imu"   default="0" />
 
@@ -11,23 +23,9 @@
     --vio_use_events_and_images=0
     --vio_rescale_intrinsics_for_distortion=true
 
-    ################ SET PARAMETERS ###########################
-    # Calibration file
-    # when using camera imu and no ir filter 'DVXplorer.yaml'
-    # when using camera imu and ir filter 'DVXplorer-ir.yaml'
-    # when using autopilot imu and ir filter 'DVXplorer-ir-autopiloto'
-    --calib_filename=$(find ze_vio_ceres)/../../calibration/DVXplorer-ir.yaml
-    
-    # IMU calibration file
-    # when using camera imu 'dvx_imu_parameters'
-    # when using autopilot imu 'autopiloto_imu_parameters'
-    --flagfile=$(find ze_vio_ceres)/cfg/dvx_imu_parameters.conf
-
-    # USLAM parameters
-    # f we want to use only one parameter 'dvx_parameters.yaml'
-    # f we want to do a parameters study 'dvx_parameters_study.yaml'
-    --flagfile=$(find ze_vio_ceres)/cfg/dvx_parameters_study.conf
-    ############################################################
+    --calib_filename=$(env calibration_camera_filename)
+    --flagfile=$(env calibration_imu_filename)
+    --flagfile=$(env odometry_parameters_filename)
 
     --timeshift_cam_imu=$(arg timeshift_cam_imu) 
     --flagfile=$(find ze_vio_ceres)/cfg/vio_base.conf
@@ -35,16 +33,39 @@
     "
   />
 
+  <!-- Static transformation between vicon and map -->
   <node name="tf_static_vicon_origin_to_map_origin_node" 
     pkg="ze_vio_ceres"
     type="tf_static_vicon_origin_to_map_origin.py"
     output="screen" args=""
   />  
 
-  <include file="$(find ze_vio_ceres)/launch/f550_tfs.launch"/>
+  <!-- Vicon path representation -->
+  <node name="vicon_path" 
+    pkg="ze_vio_ceres"
+    type="vicon_path"
+    output="screen" args=""
+  />
 
+  <!-- Writing txt with odometry and vicon data -->
+  <node name="txt_writing_parameters" 
+    pkg="ze_vio_ceres"
+    type="txt_writing_parameters"
+    output="screen" args= ""
+  />
+
+  <!-- Publish dvs_sensor_2_dvs_sensor_optical transform -->
+  <!-- <node name="dvs_sensor_optical_transform_publisher" pkg="ze_vio_ceres" type="dvs_sensor_optical_transform_publisher"
+    output="screen" required="true"/> -->
+
+
+  <!-- Static transformation between map and odom -->
   <include file="$(find ze_vio_ceres)/launch/tf_static_map_origin_to_odom.launch"/>
 
+  <!-- Transformation from base_link to camera -->
+  <include file="$(find ze_vio_ceres)/launch/tfs_f550.launch"/>
+
+  <!-- Visualisation -->
   <node name="visualisation" pkg="rviz" type="rviz" output="screen" args="-d $(find ze_visualization)/rviz/ze.rviz" />
 
-</launch>
+</launch> 

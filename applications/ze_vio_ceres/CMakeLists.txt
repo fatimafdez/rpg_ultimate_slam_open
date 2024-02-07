@@ -41,11 +41,11 @@ add_executable(txt_writing_parameters src/txt_writing_parameters.cpp)
 target_link_libraries(txt_writing_parameters ${catkin_LIBRARIES})
 # add_dependencies(txt_writing_parameters )
 
-add_executable(txt_writing_vicon src/txt_writing_vicon.cpp)
-target_link_libraries(txt_writing_vicon ${catkin_LIBRARIES})
+# add_executable(txt_writing_vicon src/txt_writing_vicon.cpp)
+# target_link_libraries(txt_writing_vicon ${catkin_LIBRARIES})
 
-add_executable(txt_writing_odometry src/txt_writing_odometry.cpp)
-target_link_libraries(txt_writing_odometry ${catkin_LIBRARIES})
+# add_executable(txt_writing_odometry src/txt_writing_odometry.cpp)
+# target_link_libraries(txt_writing_odometry ${catkin_LIBRARIES})
 
 add_executable(event_msg_length src/event_msg_length.cpp)
 target_link_libraries(event_msg_length ${catkin_LIBRARIES})

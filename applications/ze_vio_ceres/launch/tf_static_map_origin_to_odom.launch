@@ -11,5 +11,5 @@
 	<!-- map -> odom -->
     <node pkg="tf2_ros" type="static_transform_publisher" name="tf_map_odom"  output="screen" respawn="true" 
     args="0.0 0.0 0.0 -$(arg PI_2) 0.0 0.0 map odom"/>
-
+    
 </launch>

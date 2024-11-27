@@ -13,9 +13,10 @@ Panels:
         - /TF1
         - /TF1/Frames1
         - /Marker1/Namespaces1
-        - /Pose1
+        - /Pose_vicon1
+        - /Path_vicon1/Offset1
       Splitter Ratio: 0.5
-    Tree Height: 468
+    Tree Height: 282
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -65,7 +66,7 @@ Visualization Manager:
         dvs_sensor:
           Value: false
         dvs_sensor_optical_frame:
-          Value: false
+          Value: true
         fcu:
           Value: false
         map:
@@ -73,13 +74,13 @@ Visualization Manager:
         odom:
           Value: true
         vicon:
-          Value: true
+          Value: false
       Marker Alpha: 1
       Marker Scale: 1
       Name: TF
       Show Arrows: false
       Show Axes: true
-      Show Names: false
+      Show Names: true
       Tree:
         vicon:
           map:
@@ -145,22 +146,80 @@ Visualization Manager:
       Axes Radius: 0.03999999910593033
       Class: rviz/Pose
       Color: 255; 25; 0
-      Enabled: true
+      Enabled: false
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
-      Name: Pose
+      Name: Pose_vicon
       Queue Size: 10
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Axes
       Topic: /vicon_client/f550_events/pose
       Unreliable: false
+      Value: false
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 255; 100; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path_vicon
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Queue Size: 10
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /vicon_path
+      Unreliable: false
       Value: true
+    - Class: rviz/Camera
+      Enabled: false
+      Image Rendering: background and overlay
+      Image Topic: /ze_vio/event_img
+      Name: Camera
+      Overlay Alpha: 0.5
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: false
+      Visibility:
+        DAVIS frame: true
+        Grid: true
+        Image: true
+        Input to VIO: true
+        Marker: true
+        Path: true
+        Path_vicon: true
+        Pose_vicon: true
+        TF: true
+        Value: true
+      Zoom Factor: 1
+    - Class: rviz/Image
+      Enabled: false
+      Image Topic: /ze_vio/event_img
+      Max Value: 1
+      Median window: 5
+      Min Value: 0
+      Name: Image
+      Normalize Range: true
+      Queue Size: 2
+      Transport Hint: raw
+      Unreliable: false
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 220; 220; 220
     Default Light: true
-    Fixed Frame: vicon
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -174,7 +233,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 6.630172252655029
+      Distance: 8.303840637207031
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -182,31 +241,35 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.5088366270065308
-        Y: 0.8626759648323059
-        Z: 0.5712398886680603
+        X: 1.274991512298584
+        Y: 0.7695385217666626
+        Z: 0.5426900386810303
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.1647969484329224
+      Pitch: 0.8597975969314575
       Target Frame: <Fixed Frame>
-      Yaw: 3.7935428619384766
+      Yaw: 4.058544158935547
     Saved: ~
 Window Geometry:
+  Camera:
+    collapsed: false
   DAVIS frame:
     collapsed: false
   Displays:
     collapsed: false
-  Height: 1016
+  Height: 1043
   Hide Left Dock: false
   Hide Right Dock: false
+  Image:
+    collapsed: false
   Input to VIO:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000200000000000001710000025ffc0200000002fb0000000a0056006900650077007300000000280000015b000000a400fffffffb000000100044006900730070006c006100790073010000003d0000025f000000c900ffffff000000030000073800000139fc0100000002fb000000180049006e00700075007400200074006f002000560049004f0100000000000007380000008800fffffffb00000016004400410056004900530020006600720061006d0065000000039d000003a20000008a00ffffff000005c10000025f00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd000000020000000000000249000003b9fc0200000005fb0000000a0056006900650077007300000000280000015b000000a400fffffffb000000100044006900730070006c006100790073010000003d000001a5000000c900fffffffb000000180049006e00700075007400200074006f002000560049004f01000001e80000020e0000001600fffffffb0000000c00430061006d00650072006100000001650000007c0000001600fffffffb0000000a0049006d00610067006500000001b5000000e70000001600ffffff000000030000073800000139fc0100000001fb00000016004400410056004900530020006600720061006d0065000000039d000003a2000000a200ffffff00000531000003b900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
-  Width: 1848
-  X: 72
-  Y: 27
+  Width: 1920
+  X: 1920
+  Y: 0
